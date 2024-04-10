@@ -48,6 +48,24 @@ def add_user():
     module = 'user'
     return render_template('add_user.html', module=module, data=std_list)
 
+@app.post('/create_user')
+def create_user():
+    module = 'user'
+    id = request.form.get('id')
+    name = request.form.get('name')
+    gender = request.form.get('gender')
+    phone = request.form.get('phone')
+    email = request.form.get('email')
+    address = request.form.get('address')
+    user ={
+        'name': name,
+        'gender': gender,
+        'phone': phone,
+        'email': email,
+        'address': address
+    }
+    return user
+
 
 @app.route('/view_user')
 def view_user():
