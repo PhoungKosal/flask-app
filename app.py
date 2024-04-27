@@ -1,28 +1,24 @@
 import random
 
 from flask import Flask, render_template, request
+import  sqlite3
 
 app = Flask(__name__)
 
-names = ['Kosal', 'Nith', 'Sokha', 'Rithy', 'Sokun', 'Vannak', 'Sok', 'Sopheak', 'Meng', 'Chan']
-genders = ['male', 'female']
-addresses = ['Phnom Penh', 'Siem Reap', 'Battambang', 'Sihanoukville', 'Kampot', 'Kampong Cham', 'Kampong Thom',
-             'Kratie', 'Preah Sihanouk', 'Koh Kong']
-
 std_list = []
 
-for i in range(1, 11):
-    first_name = random.choice(names)
-    email = f"{first_name.lower()}@gmail.com"
-    student = {
-        'id': i,
-        'name': first_name,
-        'gender': random.choice(genders),
-        'phone': ''.join(random.choices('0123456789', k=10)),
-        'email': email,
-        'address': random.choice(addresses)
-    }
-    std_list.append(student)
+cnn = sqlite3.connect('ss20_db.sqlite3')
+cour = cnn.cursor()
+students = cour.execute("""SELECT * FROM students limit 10""")
+for row in students:
+    std_list.append({
+        'id': row[0],
+        'name': row[1],
+        'gender': row[2],
+        'phone': row[3],
+        'email': row[4],
+        'address': row[5]
+    })
 
 
 @app.route('/')
