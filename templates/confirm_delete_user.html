@@ -25,20 +25,23 @@
                                 </a>
                             </div>
                             <div class="card-body">
-                                <h3 class="text-danger">Do you want to delete ?</h3>
+                                <h3 class="text-danger">Do you want to delete?</h3>
                                 <ul>
-                                    <li>Name : {{ data['name'] }}</li>
-                                    <li>Gender : {{ data['gender'] }}</li>
-                                    <li>Phone : {{ data['phone'] }}</li>
-                                    <li>Email : {{ data['email'] }}</li>
-                                    <li>Address : {{ data['address'] }}</li>
+                                    <li>Name: {{ data[1] }}</li>
+                                    <li>Gender: {{ data[2] }}</li>
+                                    <li>Phone: {{ data[3] }}</li>
+                                    <li>Email: {{ data[4] }}</li>
+                                    <li>Address: {{ data[5] }}</li>
                                 </ul>
                             </div>
                             <div class="card-footer">
-                                <a href="{{ url_for('user') }}">
-                                    <input type="button" class="btn btn-warning float-left" value="Cancel">
-                                </a>
-                                <input type="button" class="btn btn-danger float-right" value="Yes, Delete!">
+                                <form method="POST" action="{{ url_for('delete_user') }}">
+                                    <input type="hidden" name="id" value="{{ data[0] }}">
+                                    <a href="{{ url_for('user') }}">
+                                        <input type="button" class="btn btn-warning float-left" value="Cancel">
+                                    </a>
+                                    <input type="submit" class="btn btn-danger float-right" value="Yes, Delete!">
+                                </form>
                             </div>
                         </div>
                     </div>
